@@ -112,9 +112,9 @@ export const create = async (req, res) => {
 	try {
 		const doc = new RoomModel({
 			title: req.body.title,
-			text: req.body.text,
-			imageUrl: req.body.imageUrl,
-			tags: req.body.tags,
+			time: req.body.time,
+			date: req.body.date,
+			place: req.body.place,
 			//вытащит после авторизации
 			user: req.userId,
 		});
@@ -141,9 +141,9 @@ export const update = async (req, res) => {
 			},
 			{
 				title: req.body.title,
-				text: req.body.text,
-				imageUrl: req.body.imageUrl,
-				tags: req.body.tags,
+				time: req.body.time,
+				date: req.body.date,
+				place: req.body.place,
 				//вытащит после авторизации
 				user: req.userId,
 			},

@@ -16,6 +16,8 @@ const UserSchema = new mongoose.Schema(
 			required: true,
 		},
 		avatarUrl: String,
+		preferredSport: String,
+		age: String,
 	},
 	{
 		timestamps: true,

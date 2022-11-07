@@ -6,15 +6,27 @@ const RoomSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		text: {
+		time: {
 			type: String,
 			required: true,
-			unique: true,
 		},
-		tags: {
+		date: {
+			type: String,
+			required: true,
+		},
+		place: {
+			type: String,
+			required: true,
+		},
+		joined: {
 			type: Array,
 			default: [],
 		},
+		visitors: {
+			type: Array,
+			default: [],
+		},
+
 		viewsCount: {
 			type: Number,
 			default: 0,
