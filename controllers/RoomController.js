@@ -112,6 +112,7 @@ export const create = async (req, res) => {
 	try {
 		const doc = new RoomModel({
 			title: req.body.title,
+			preferredSport: req.body.preferredSport,
 			time: req.body.time,
 			date: req.body.date,
 			place: req.body.place,
@@ -141,6 +142,7 @@ export const update = async (req, res) => {
 			},
 			{
 				title: req.body.title,
+				preferredSport: req.body.preferredSport,
 				time: req.body.time,
 				date: req.body.date,
 				place: req.body.place,

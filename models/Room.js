@@ -6,6 +6,10 @@ const RoomSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
+		preferredSport: {
+			type: String,
+			required: true,
+		},
 		time: {
 			type: String,
 			required: true,
@@ -36,7 +40,6 @@ const RoomSchema = new mongoose.Schema(
 			ref: 'User',
 			required: true,
 		},
-		imageUrl: String,
 	},
 	{
 		timestamps: true,

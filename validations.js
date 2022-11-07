@@ -19,9 +19,8 @@ export const loginValidation = [
 //для создания комнаты
 export const roomCreateValidation = [
 	body('title', 'Введите название комнаты').isLength({ min: 3 }).isString(),
+	body('preferredSport', 'Укажите вид спорта').isLength({ min: 3 }).isString(),
 	body('time', 'Укажите время').isLength({ min: 3 }).isString(),
 	body('date', 'Укажите дату').isLength({ min: 3 }).isString(),
 	body('place', 'Укажите место').isLength({ min: 3 }).isString(),
-	//body('joined', 'Укажите дату').isLength({ min: 3 }).isString(),
-	//body('visitors', 'Укажите место').isLength({ min: 3 }).isString(),
 ];
