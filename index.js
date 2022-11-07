@@ -3,9 +3,9 @@ import express from 'express';
 import cors from 'cors';
 
 import mongoose from 'mongoose';
-import { registerValidation, loginValidation } from './validations.js';
+import { registerValidation, loginValidation, roomCreateValidation } from './validations.js';
 import { handleValidationErrors, checkAuth } from './utils/index.js';
-import { UserController } from './controllers/index.js';
+import { UserController, RoomController } from './controllers/index.js';
 
 mongoose
 	.connect(
@@ -55,24 +55,24 @@ app.post('/auth/register', registerValidation, handleValidationErrors, UserContr
 //получение информации о себе
 app.get('/auth/me', checkAuth, UserController.getMe);
 
-//получение всех статей
-//app.get('/posts', PostController.getAll);
+//получение всех комнат
+app.get('/rooms', RoomController.getAll);
 //получение всех тэгов
 //app.get('/tags', PostController.getLastTags);
-//получить одну статью
-//app.get('/posts/:id', PostController.getOne);
-//создать статью
-//app.post('/posts', checkAuth, postCreateValidation, handleValidationErrors, PostController.create);
-//удалить статью
-//app.delete('/posts/:id', checkAuth, PostController.remove);
-//обновить статью
-//app.patch(
-//	'/posts/:id',
-//	checkAuth,
-//	postCreateValidation,
-//	handleValidationErrors,
-//	PostController.update,
-//);
+//получить одну комнату
+app.get('/rooms/:id', RoomController.getOne);
+//создать комнату
+app.post('/rooms', checkAuth, roomCreateValidation, handleValidationErrors, RoomController.create);
+//удалить комнату
+app.delete('/rooms/:id', checkAuth, RoomController.remove);
+//обновить комнату
+app.patch(
+	'/rooms/:id',
+	checkAuth,
+	roomCreateValidation,
+	handleValidationErrors,
+	RoomController.update,
+);
 
 app.listen(4444, (err) => {
 	if (err) {
