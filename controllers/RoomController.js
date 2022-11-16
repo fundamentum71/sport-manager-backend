@@ -116,6 +116,7 @@ export const create = async (req, res) => {
 			time: req.body.time,
 			date: req.body.date,
 			place: req.body.place,
+			dateCreatedRoom: new Date().toLocaleString(),
 			//вытащит после авторизации
 			user: req.userId,
 		});

@@ -20,6 +20,7 @@ const RoomSchema = new mongoose.Schema(
 		},
 		dateCreatedRoom: {
 			type: String,
+			required: true,
 		},
 		place: {
 			type: String,

@@ -23,4 +23,5 @@ export const roomCreateValidation = [
 	body('time', 'Укажите время').isLength({ min: 3 }).isString(),
 	body('date', 'Укажите дату').isLength({ min: 3 }).isString(),
 	body('place', 'Укажите место').isLength({ min: 3 }).isString(),
+	//body('dateCreatedRoom', 'Не пришло время создания комнаты').isLength({ min: 3 }).isString(),
 ];
