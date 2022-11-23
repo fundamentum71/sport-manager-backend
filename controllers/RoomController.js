@@ -117,6 +117,7 @@ export const create = async (req, res) => {
 			date: req.body.date,
 			place: req.body.place,
 			dateCreatedRoom: new Date().toLocaleString(),
+
 			//вытащит после авторизации
 			user: req.userId,
 		});
@@ -147,8 +148,9 @@ export const update = async (req, res) => {
 				time: req.body.time,
 				date: req.body.date,
 				place: req.body.place,
+				joined: req.body.joined,
 				//вытащит после авторизации
-				user: req.userId,
+				//user: req.userId,
 			},
 		);
 
