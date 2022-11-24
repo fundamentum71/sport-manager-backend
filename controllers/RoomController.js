@@ -149,6 +149,7 @@ export const update = async (req, res) => {
 				date: req.body.date,
 				place: req.body.place,
 				joined: req.body.joined,
+				visitors: req.body.visitors,
 				//вытащит после авторизации
 				//user: req.userId,
 			},
