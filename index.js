@@ -2,6 +2,7 @@ import express from 'express';
 import multer from 'multer';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import fs from 'fs';
 import {
 	registerValidation,
 	loginValidation,
