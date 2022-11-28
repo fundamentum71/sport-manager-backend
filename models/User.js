@@ -18,6 +18,7 @@ const UserSchema = new mongoose.Schema(
 		avatarUrl: String,
 		preferredSport: String,
 		age: String,
+		city: String,
 		gamesPlayed: Number,
 		gamesLeave: Number,
 	},

@@ -2,7 +2,7 @@ import RoomModel from '../models/Room.js';
 
 export const getAll = async (req, res) => {
 	try {
-		//получаем все посты и связываем их с таблицей users
+		//получаем все комнаты и связываем их с таблицей users
 		const rooms = await RoomModel.find().populate('user').exec();
 
 		res.json(rooms);
@@ -59,7 +59,7 @@ export const getOne = async (req, res) => {
 				}
 				if (!doc) {
 					return res.status(404).json({
-						message: 'Статья не найдена',
+						message: 'Комната не найдена',
 					});
 				}
 				res.json(doc);
@@ -135,7 +135,7 @@ export const create = async (req, res) => {
 
 export const update = async (req, res) => {
 	try {
-		//вытаскиваем id статьи
+		//вытаскиваем id комнаты
 		const roomId = req.params.id;
 
 		await RoomModel.updateOne(

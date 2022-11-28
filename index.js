@@ -3,7 +3,12 @@ import multer from 'multer';
 import cors from 'cors';
 
 import mongoose from 'mongoose';
-import { registerValidation, loginValidation, roomCreateValidation } from './validations.js';
+import {
+	registerValidation,
+	loginValidation,
+	roomCreateValidation,
+	updateUserValidation,
+} from './validations.js';
 import { handleValidationErrors, checkAuth } from './utils/index.js';
 import { UserController, RoomController } from './controllers/index.js';
 
@@ -72,6 +77,19 @@ app.patch(
 	roomCreateValidation,
 	handleValidationErrors,
 	RoomController.update,
+);
+//получение всех пользователей
+app.get('/users', checkAuth, UserController.getAll);
+//получение пользователя по id
+app.get('/users/:id', checkAuth, UserController.getOne);
+
+//редактирование профиля
+app.patch(
+	'/users/:id',
+	checkAuth,
+	updateUserValidation,
+	handleValidationErrors,
+	UserController.update,
 );
 
 app.listen(4444, (err) => {

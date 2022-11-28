@@ -13,8 +13,8 @@ export const register = async (req, res) => {
 
 		const doc = new UserModel({
 			email: req.body.email,
-			fullName: req.body.fullName,
-			avatarUrl: req.body.avatarUrl,
+			//fullName: req.body.fullName,
+			//avatarUrl: req.body.avatarUrl,
 			passwordHash: hash,
 		});
 
@@ -109,6 +109,90 @@ export const getMe = async (req, res) => {
 		console.log(error);
 		res.status(500).json({
 			message: 'Нет доступа',
+		});
+	}
+};
+
+export const getAll = async (req, res) => {
+	try {
+		//получаем всех users
+		const users = await UserModel.find().exec();
+
+		res.json(users);
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({
+			message: 'Не удалось получить всех пользователей',
+		});
+	}
+};
+
+export const getOne = async (req, res) => {
+	try {
+		//вытаскиваем id пользователя
+		const userId = req.params.id;
+
+		//найти пользователя по id
+		UserModel.findOneAndUpdate(
+			{
+				_id: userId,
+			},
+			{
+				//показать только одного пользователя
+				$inc: { viewsCount: 1 },
+			},
+			{
+				//после обновления вернуть
+				returnDocument: 'after',
+			},
+			(err, doc) => {
+				if (err) {
+					console.log(err);
+					return res.status(500).json({
+						message: 'Не удалось получить пользователя',
+					});
+				}
+				if (!doc) {
+					return res.status(404).json({
+						message: 'Пользователь не найден',
+					});
+				}
+				res.json(doc);
+			},
+		);
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({
+			message: 'Не удалось получить пользователя',
+		});
+	}
+};
+
+export const update = async (req, res) => {
+	try {
+		//вытаскиваем id пользователя
+		const userId = req.params.id;
+
+		await UserModel.updateOne(
+			{
+				_id: userId,
+			},
+			{
+				fullName: req.body.fullName,
+				avatarUrl: req.body.avatarUrl,
+				preferredSport: req.body.preferredSport,
+				age: req.body.age,
+				city: req.body.city,
+			},
+		);
+
+		res.json({
+			success: true,
+		});
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({
+			message: 'Не удалось обновить профиль',
 		});
 	}
 };
