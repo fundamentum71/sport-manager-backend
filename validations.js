@@ -16,11 +16,11 @@ export const loginValidation = [
 
 //проверка обновления профиля
 export const updateUserValidation = [
-	body('fullName', 'Неверно указано имя').optional().isLength({ min: 3 }).isString(),
-	body('preferredSport', 'Неверно указан вид спорта').optional().isLength({ min: 3 }).isString(),
-	body('age', 'Укажите возраст').optional().isLength({ min: 1 }).isString(),
-	body('city', 'Неверно указан город(string)').optional().isLength({ min: 2 }).isString(),
-	body('avatarUrl', 'Неверная ссылка на аватарку').optional().isURL(),
+	body('fullName', 'Неверно указано имя').optional().isString(),
+	body('preferredSport', 'Неверно указан вид спорта').optional().isString(),
+	body('age', 'Укажите возраст').optional().isString(),
+	body('city', 'Неверно указан город(string)').optional().isString(),
+	body('avatarUrl', 'Неверная ссылка на аватарку').optional(),
 ];
 
 //валидация для комнат

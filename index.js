@@ -3,6 +3,8 @@ import multer from 'multer';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import fs from 'fs';
+import { v4 as uuidv4 } from 'uuid';
+
 import {
 	registerValidation,
 	loginValidation,
@@ -21,18 +23,21 @@ mongoose
 
 const app = express();
 
+let avatarUrl;
 //создаем хранилище где будем сохранять картинки
 const storage = multer.diskStorage({
-	destination: (_, __, cb) => {
+	//где будет сохраняться,фукция ожидает параметры (запрос,файл, колбек)
+	destination: (req, file, cb) => {
 		//не получает ошибок и нужно сохранить файлы в папку uploads
 		if (!fs.existsSync('uploads')) {
 			fs.mkdirSync('uploads');
 		}
 		cb(null, 'uploads');
 	},
+	//как будет называться
 	filename: (_, file, cb) => {
 		//не получает ошибок и вытаскиваем оригинальное название
-		cb(null, file.originalname);
+		cb(null, (avatarUrl = uuidv4() + '.jpg'));
 	},
 });
 
@@ -44,14 +49,34 @@ app.use(express.json());
 //разрешаем запросы
 app.use(cors());
 
-//дает возможность обращаться к файлам в папке
+//дает возможность обращаться к файлам в папке(проверит есть ли файл в папке )
 app.use('/uploads', express.static('uploads'));
 
 //запрос на загрузку картинки
-app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
+app.post('/upload', checkAuth, upload.single('avatar'), (req, res) => {
+	//вернем ответ
 	res.json({
-		url: `/uploads/${req.file.originalname}`,
+		url: `/uploads/${avatarUrl}`,
 	});
+});
+
+app.post('/deleteAvatar', checkAuth, (req, res) => {
+	try {
+		const avatarDelete = req.body.avatarImg.slice(9);
+		console.log('удаление req', avatarDelete);
+		fs.unlink(`uploads/${avatarDelete}`, (err) => {
+			if (err) throw err; // не удалось удалить файл
+			console.log('Файл успешно удалён');
+		});
+		res.status(200).json({
+			message: 'Фотография удалена',
+		});
+	} catch (error) {
+		console.log(error);
+		res.status(500).json({
+			message: 'Не удалось удалить фотографию',
+		});
+	}
 });
 
 //авторизация
