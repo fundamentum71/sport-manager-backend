@@ -62,7 +62,7 @@ app.post('/upload', checkAuth, upload.single('avatar'), (req, res) => {
 
 app.post('/deleteAvatar', checkAuth, (req, res) => {
 	try {
-		console.log(req.body.avatarImg);
+		console.log(req.body.deletePhoto);
 		const avatarDelete = req.body.deletePhoto.slice(9);
 		console.log('удаление req', avatarDelete);
 		fs.unlink(`uploads/${avatarDelete}`, (err) => {
