@@ -62,7 +62,8 @@ app.post('/upload', checkAuth, upload.single('avatar'), (req, res) => {
 
 app.post('/deleteAvatar', checkAuth, (req, res) => {
 	try {
-		const avatarDelete = req.body.avatarImg.slice(9);
+		console.log(req.body.avatarImg);
+		const avatarDelete = req.body.deletePhoto.slice(9);
 		console.log('удаление req', avatarDelete);
 		fs.unlink(`uploads/${avatarDelete}`, (err) => {
 			if (err) throw err; // не удалось удалить файл
