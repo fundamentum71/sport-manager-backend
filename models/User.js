@@ -15,12 +15,18 @@ const UserSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
+		gamesPlayed: {
+			type: Number,
+			default: 0,
+		},
+		gamesLeave: {
+			type: Number,
+			default: 0,
+		},
 		avatarUrl: String,
 		preferredSport: String,
 		age: String,
 		city: String,
-		gamesPlayed: Number,
-		gamesLeave: Number,
 	},
 	{
 		timestamps: true,
